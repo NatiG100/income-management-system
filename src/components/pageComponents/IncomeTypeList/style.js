@@ -4,6 +4,7 @@ export const StyledIncomeTypeList = styled.div`
     width:100% ;
     height:100vh;
     overflow-y:auto ;
+    padding:40px ;
 `;
 export const StyledActions = styled.div`
     width:40% ;

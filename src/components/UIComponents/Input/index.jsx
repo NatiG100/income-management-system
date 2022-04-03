@@ -4,7 +4,7 @@ import {
     StyledInputLabel,
     StyledInputItem
 } from './style';
-const Input = ({ type, placeholder, label, setValue, value }) => {
+const Input = ({ disabled = false, type, placeholder, label, setValue, value }) => {
     return (
         <StyledInput>
             <StyledInputLabel>{label}</StyledInputLabel>
@@ -13,6 +13,7 @@ const Input = ({ type, placeholder, label, setValue, value }) => {
                 placeholder={placeholder}
                 value={value}
                 onChange={(event) => { setValue(event.target.value) }}
+                disabled={disabled}
             />
         </StyledInput>
     );

@@ -14,28 +14,10 @@ const IncomeTypeList = () => {
         <StyledIncomeTypeList>
             <StyledAddWrapper>
                 <RoundButton
-                    text='Add Payment Method'
+                    text=' ╬ Add Payment Method'
                     onClick={() => { }}
                 />
             </StyledAddWrapper>
-            <PaymentMethodList
-                company={companies[0]}
-                isAdmin={true}
-                setSelectedIndex={(index) => setSelected(index)}
-                selectedIndex={selected}
-            />
-            <PaymentMethodList
-                company={companies[0]}
-                isAdmin={true}
-                setSelectedIndex={(index) => setSelected(index)}
-                selectedIndex={selected}
-            />
-            <PaymentMethodList
-                company={companies[0]}
-                isAdmin={true}
-                setSelectedIndex={(index) => setSelected(index)}
-                selectedIndex={selected}
-            />
             <PaymentMethodList
                 company={companies[0]}
                 isAdmin={true}
