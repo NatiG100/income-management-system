@@ -10,7 +10,7 @@ import RoundButton from '../../../UIComponents/RoundButton';
 const Navbar = () => {
     return (
         <StyledNavbar>
-            <StyledBrand>PMS</StyledBrand>
+            <StyledBrand>IMS</StyledBrand>
             <StyledNavigation>
                 <StyledNavItem selected={false}>Home</StyledNavItem>
                 <StyledNavItem selected={true}>Payment</StyledNavItem>
