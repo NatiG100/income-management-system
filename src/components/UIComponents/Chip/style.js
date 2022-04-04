@@ -11,6 +11,6 @@ export const StyledChip = styled.button`
     margin:10px;
     cursor: pointer;
     :hover{
-            background-image:linear-gradient(90deg,#2222,#2221,#2222) ;
+            background-image:linear-gradient(90deg,#2222,#2222) ;
     }
 `;
