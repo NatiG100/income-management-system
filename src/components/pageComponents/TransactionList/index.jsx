@@ -6,7 +6,7 @@ import {
     StyledTransactionFilter,
     StyledTransaction,
     StyledTransactionList,
-    StyledDateSelector
+    StyledFilter
 } from './style';
 import transactions from '../../../data/transactions';
 import ToggleSwitch from '../../UIComponents/ToggleSwitch';
@@ -56,7 +56,7 @@ const TransactionList = () => {
                     onclick={() => { setSelectedMethod("Method3") }}
                 />
             </StyledTransactionFilter>
-            <StyledDateSelector>
+            <StyledFilter>
                 <ToggleSwitch
                     isOn={isOn}
                     toggle={toggle}
@@ -84,7 +84,7 @@ const TransactionList = () => {
                     value={min}
                     setValue={setMin}
                 />
-            </StyledDateSelector>
+            </StyledFilter>
 
             <StyledTransactionList>
                 <TransactionHeader

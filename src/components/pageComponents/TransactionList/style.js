@@ -29,14 +29,17 @@ export const StyledTransactionList = styled.div`
     padding:0px ;
     box-shadow:1px 1px 4px #2226 ;
 `;
-export const StyledDateSelector = styled.div`
+export const StyledFilter = styled.div`
     width:100% ;
     justify-self:flex-end ;
-    margin-bottom:20px ;
     display: grid;
     grid-template-columns:1fr 2fr 2fr 2fr;
     justify-content:center ;
     align-items:center ;
    gap:10px;
    margin-bottom:40px ;
+   border:1px solid #ededed;
+   padding:15px;
+   border-radius: 5px;
+   background-color:#fdfdfd ;
 `;
