@@ -60,7 +60,7 @@ const IncomeTypeList = () => {
                 />
                 <RoundButton
                     text='Delete'
-                    color='secondary'
+                    color='error'
                     onClick={() => { }}
                 />
             </StyledActions>
