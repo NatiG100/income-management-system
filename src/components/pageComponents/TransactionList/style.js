@@ -6,6 +6,7 @@ export const StyledTransactions = styled.div`
     height:100vh ;
     width:100% ;
     overflow-y: auto;
+    
     `;
 export const StyledTransactionFilter = styled.div`
 display:flex ;
@@ -15,6 +16,7 @@ display:flex ;
 `;
 export const StyledTransaction = styled.div`
     display:grid ;
+    position:relative ;
     grid-template-columns:repeat(5,1fr) ;
     padding-top:10px ;
     padding-bottom:15px ;
@@ -24,6 +26,10 @@ export const StyledTransaction = styled.div`
     background-color:${({ odd }) => odd ? "#fafafa" : "#ededed"} ;
     padding-left: 15px;
     padding-right: 15px;
+    ${({ isHeader }) => (!isHeader && "cursor:pointer;")}
+    :hover{
+        ${({ isHeader }) => (!isHeader && "box-shadow:0px 3px 5px #2223;")}
+    }
 `;
 export const StyledTransactionList = styled.div`
     padding:0px ;

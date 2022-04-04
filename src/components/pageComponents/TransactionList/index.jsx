@@ -99,6 +99,7 @@ const TransactionList = () => {
                         method={transaction.method}
                         paiedBy={transaction.client}
                         odd={transactionIndex % 2 == 0}
+                        style={{ zIndex: `${transactions.length - transactionIndex}` }}
                     />
                 ))}
 
@@ -116,9 +117,10 @@ const Transaction = ({
     method,
     amount,
     paiedBy,
+    style,
 }) => {
     return (
-        <StyledTransaction odd={odd}>
+        <StyledTransaction odd={odd} isHeader={false} style={style}>
             <p>{id}</p>
             <p>{date}</p>
             <p>{method}</p>
@@ -129,7 +131,7 @@ const Transaction = ({
 }
 const TransactionHeader = ({ odd }) => {
     return (
-        <StyledTransaction odd={odd}>
+        <StyledTransaction odd={odd} isHeader={true}>
             <p><b>Transaction Id</b></p>
             <p><b>Date</b></p>
             <p><b>Method</b></p>
