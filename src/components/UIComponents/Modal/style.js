@@ -20,7 +20,7 @@ pointer-events:all;
     padding:20px ;
     border-radius:10px ;
     background-color:white ;
-    height:80% ;
+    max-height:80% ;
     overflow-y: auto;
 `;
 export const StyledBackdrop = styled.div`
