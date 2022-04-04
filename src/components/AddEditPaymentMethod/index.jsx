@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { StyledAddEditPaymentMethod } from './style';
+import {
+    StyledAddEditPaymentMethod,
+    StyledAddEditActions
+} from './style';
 import Input from './../UIComponents/Input';
 import Textarea from '../UIComponents/TextArea';
 import Modal from '../UIComponents/Modal';
@@ -10,7 +13,8 @@ const AddEditPaymentMethod = ({
     isEdit,
     formValueForEdit,
     setOpenSuccess,
-    setOpenError
+    setOpenError,
+
 }) => {
     const [formValue, setFormValue] = useState({
         title: "",
@@ -58,11 +62,18 @@ const AddEditPaymentMethod = ({
                     setValue={(value) => { setFormItemValue("description", value) }}
                     value={formValue.description}
                 />
-                <RoundButton
-                    color='primary'
-                    text={isEdit ? "Save Changes" : "Add Method"}
-                    onClick={handleFormSubmit}
-                />
+                <StyledAddEditActions>
+                    <RoundButton
+                        color='primary'
+                        text={isEdit ? "Save Changes" : "Add Method"}
+                        onClick={handleFormSubmit}
+                    />
+                    <RoundButton
+                        color='secondary'
+                        text={"Cancel"}
+                        onClick={onClose}
+                    />
+                </StyledAddEditActions>
             </StyledAddEditPaymentMethod>
         </Modal>
 
