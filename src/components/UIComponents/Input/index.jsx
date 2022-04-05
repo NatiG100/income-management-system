@@ -7,7 +7,7 @@ import {
 const Input = ({ disabled = false, type, placeholder, label, setValue, value }) => {
     return (
         <StyledInput>
-            <StyledInputLabel>{label}</StyledInputLabel>
+            {label && <StyledInputLabel>{label}</StyledInputLabel>}
             <StyledInputItem
                 type={type}
                 placeholder={placeholder}

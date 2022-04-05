@@ -63,7 +63,6 @@ const DashboardContent = () => {
                             datasets: [{
                                 data: [{ y: 40, x: "2011" }, { y: 15, x: "2012" }, { y: 90, x: "2013" }, { y: 20, x: "2014" }],
                                 borderWidth: 1,
-                                borderJoinStyle:
                             },]
                         }}
                         height={100}

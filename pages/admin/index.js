@@ -1,5 +1,6 @@
-import Head from 'next/head'
-import ClientPage from '..'
+import Head from 'next/head';
+import DashboardContent from '../../src/components/pageComponents/DashboardContent';
+
 
 export default function Dashboard() {
     return (
@@ -9,7 +10,8 @@ export default function Dashboard() {
                 <meta name="description" content="Dashboard Page for IMS" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <h1>This Feature will be available soon!</h1>
+
+            <DashboardContent />
         </div>
     )
 }

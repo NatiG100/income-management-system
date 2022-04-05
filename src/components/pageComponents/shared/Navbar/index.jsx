@@ -6,8 +6,9 @@ import {
     StyledNavItem,
 } from './style';
 import RoundButton from '../../../UIComponents/RoundButton';
+import Input from '../../../UIComponents/Input';
 
-const Navbar = () => {
+const Navbar = ({ query, setQuery }) => {
     return (
         <StyledNavbar>
             <StyledBrand>IMS</StyledBrand>

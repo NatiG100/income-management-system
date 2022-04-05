@@ -14,8 +14,11 @@ height:100% ;
 overflow-y:auto ;
 `;
 export const StyledPaymentMethod = styled.div`
+    height:110px ;
+    
     background-color:#ededed ;
     display:grid ;
+    grid-template-rows:max-content 1fr;
     gap:10px;
     padding:15px ;
     border-radius:10px ;
@@ -33,8 +36,14 @@ export const StyledPaymentMethod = styled.div`
     }
     p{
         color: #ababab;
+        text-overflow:ellipsis ;
+        overflow:hidden ;
+        display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
     }
-`;
+    `;
 
 export const StyledContainer = styled.div`
     display:grid ;

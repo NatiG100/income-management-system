@@ -5,4 +5,7 @@ export const StyledCompanyList = styled.div`
     margin-left:auto ;
     margin-right:auto;
     margin-top:25px ;
+    input{
+        margin-bottom:40px ;
+    }
 `;

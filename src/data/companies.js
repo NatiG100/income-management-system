@@ -10,30 +10,26 @@ const companies = [
                 title: "Method 1",
                 accountNumber: "1-1",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 2",
                 accountNumber: "1-2",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 3",
                 accountNumber: "1-3",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 4",
                 accountNumber: "1-4",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
-            }
+                    "nostrud exercitation ullamco laboris nisi "
+            },
         ]
     },
     {
@@ -47,29 +43,25 @@ const companies = [
                 title: "Method 1",
                 accountNumber: "2-1",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 2",
                 accountNumber: "2-2",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 3",
                 accountNumber: "2-3",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             },
             {
                 title: "Method 4",
                 accountNumber: "2-4",
                 description: "Lorem ipsum dolor sit amet, consectetur quis " +
-                    "nostrud exercitation ullamco laboris nisi " +
-                    "ut aliquip ex ea commodo consequat.",
+                    "nostrud exercitation ullamco laboris nisi "
             }
         ]
     },

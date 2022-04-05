@@ -13,6 +13,9 @@ export const StyledNavbar = styled.div`
     justify-content:space-between ;
     align-items:center ;
     background-color:#fbfbfb ;
+    input{
+        width:300px ;
+    }
 `;
 export const StyledBrand = styled.h2`
     color:#44444e;
@@ -22,6 +25,7 @@ export const StyledNavigation = styled.div`
     display:flex ;
     gap:15px;
     align-items:center ;
+    justify-self:flex-end ;
 `;
 export const StyledNavItem = styled.a`
     color:#44444e;

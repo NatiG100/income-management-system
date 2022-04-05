@@ -13,9 +13,16 @@ export const StyledBottomSection = styled.div`
     grid-template-columns:1fr 1fr ;
     gap:10px;
     align-items:center ;
+    justify-content:center ;
+    div{
+        align-self: center;
+        input{
+            margin-bottom:0px ;
+        }
+    }
     button{
-        align-self:flex-end ;
         margin-left:10px ;
         font-size:16px ;
+        align-self: flex-end;
     }
 `;
