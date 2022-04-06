@@ -1,8 +1,11 @@
+import { useEffect } from 'react';
 import Head from 'next/head';
 import DashboardContent from '../../src/components/pageComponents/DashboardContent';
+import { useAxios } from '../../src/utils/HTTP';
 
 
 export default function Dashboard() {
+
     return (
         <div>
             <Head>
