@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
 const axios = require('axios');
 
-export function useAxios({ endPoint, method, inputData }) {
-    const [loading, setLoading] = useState(true);
+export function useLazyAxios({ endPoint, method, inputData }) {
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    const fetch = async () => {
+    const [trigger, setTrigger] = useState(false);
+
+    const fetch = () => {
+        setTrigger(true);
+    }
+    const fetchApi = async () => {
         const response = await axios({
             method,
             url: endPoint,
@@ -17,9 +22,13 @@ export function useAxios({ endPoint, method, inputData }) {
             setData(response.data);
         }
         setLoading(false);
+        setTrigger(false);
     }
     useEffect(() => {
-        fetch();
-    }, []);
-    return { loading, data, error };
+        if (trigger) {
+            setLoading(true);
+            fetchApi();
+        }
+    }, [trigger]);
+    return [fetch, { loading, data, error }];
 }
