@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
+import { GET_ALL_PAYMENT_METHOD } from '../../../../../constants/end-points/paymentMethods';
+import { useAxios } from '../../../../../utils/HTTP';
 
 import {
     StylePaymentMethodList,
     StyledPaymentMethod,
     StyledContainer,
+
 } from './style'
-const PaymentMethodList = ({ company, selectedIndex, setSelectedIndex, isAdmin = false }) => {
+const PaymentMethodList = ({ setData, company, selectedIndex, setSelectedIndex, isAdmin = false }) => {
+    const { data, loading, error } = useAxios({ ...GET_ALL_PAYMENT_METHOD(company._id) });
+    setData(data);
     return (
         <StyledContainer>
             {!isAdmin && <h2 style={{ height: "max-content" }}>Pay Now</h2>}
             {!isAdmin && <h3>Choose payment</h3>}
             {isAdmin && <h2>Payment Methods</h2>}
             <StylePaymentMethodList>
-                {company.paymentMethods.map((method, methodIndex) => (
+                {loading ? <p>Loading</p> : error ? <p>Error</p> : data.map((method, methodIndex) => (
                     <PaymentMethod
                         key={methodIndex}
                         title={method.title}

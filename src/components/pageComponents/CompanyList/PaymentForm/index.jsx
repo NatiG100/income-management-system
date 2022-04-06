@@ -12,10 +12,12 @@ const PaymentForm = ({
     setOpensuccess,
     setOpenError,
 }) => {
+
+    const [data, setData] = useState(null);
     const [value, setValue] = useState("");
     const [selectedIndex, setSelectedIndex] = useState(0);
     const handleForm = () => {
-        if (selectedIndex > -1 && selectedIndex < company.paymentMethods.length && value !== "") {
+        if (selectedIndex > -1 && selectedIndex < data?.length && value !== "") {
             setOpensuccess(true);
             closeModal();
         } else {
@@ -29,6 +31,7 @@ const PaymentForm = ({
                 company={company}
                 selectedIndex={selectedIndex}
                 setSelectedIndex={setSelectedIndex}
+                setData={setData}
             />
             <StyledBottomSection>
                 <Input

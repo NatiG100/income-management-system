@@ -5,7 +5,7 @@ import {
     StyledGraphWithTitle
 } from './style';
 import Chart from 'chart.js/auto';
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Bar, Doughnut, Line, Pie } from 'react-chartjs-2';
 
 const DashboardContent = () => {
     return (
@@ -21,6 +21,7 @@ const DashboardContent = () => {
                                 label: "Transactions",
                                 data: [40, 50, 25, 30],
                                 borderWidth: 0,
+                                backgroundColor: "#BF40BF44",
                             }],
                         }}
                         height={100}
@@ -40,6 +41,7 @@ const DashboardContent = () => {
                         data={{
                             labels: ['Meethod 1', 'Method 2', 'Method3', 'Method 4'],
                             datasets: [{
+                                label: "total",
                                 data: [40 * 100, 50 * 100, 25 * 100, 30 * 100],
                                 backgroundColor: ['#BF40BF', '#0096FF ', '#0EC29B', '#FFA500'],
                                 borderWidth: 0,
@@ -56,13 +58,18 @@ const DashboardContent = () => {
             </StyledGraphWithTitle>
             <StyledGraphWithTitle>
 
-                <h2>Transactions</h2>
+                <h2>Sells</h2>
                 <StyledGraphContainer>
                     <Line
                         data={{
                             datasets: [{
-                                data: [{ y: 40, x: "2011" }, { y: 15, x: "2012" }, { y: 90, x: "2013" }, { y: 20, x: "2014" }],
-                                borderWidth: 1,
+                                label: "Sells",
+                                data: [{ y: 20, x: "2011" }, { y: 15, x: "2012" }, { y: 30, x: "2013" }, { y: 55, x: "2014" },
+                                { y: 40, x: "2015" }, { y: 60, x: "2016" }, { y: 70, x: "2017" }, { y: 72, x: "2018" }],
+                                borderWidth: 2,
+                                backgroundColor: "#BF40BF44",
+                                fill: true,
+                                tension: 0.3
                             },]
                         }}
                         height={100}
@@ -79,7 +86,7 @@ const DashboardContent = () => {
 
                 <h2>Transactions</h2>
                 <StyledGraphContainer>
-                    <Pie
+                    <Doughnut
                         data={{
                             labels: ['Meethod 1', 'Method 2', 'Method3', 'Method 4'],
                             datasets: [{
@@ -93,6 +100,11 @@ const DashboardContent = () => {
                         options={{
                             maintainAspectRatio: false,
                             responsive: true,
+                            plugins: {
+                                labels: {
+
+                                }
+                            }
                         }}
                     />
                 </StyledGraphContainer>
