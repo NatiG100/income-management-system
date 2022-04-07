@@ -22,11 +22,11 @@ const userInitialState = {
     name: "",
     email: "",
     password: "",
-    company: "",
 };
 
 const RegisterPage = () => {
 
+    const [id, setid] = useState("");
 
     //compmany logic
     const [company, setCompany] = useState(companyInitialState);
@@ -41,40 +41,36 @@ const RegisterPage = () => {
     //user logic
     const [user, setUser] = useState(userInitialState);
     const [saveUser, { loading: userLoading, error: userError, data: userData }] = useLazyAxios(
-        { ...CREATE_USER, inputData: user }
+        { ...CREATE_USER, inputData: { ...user, company: id } }
     )
     const setUserField = (value, field) => {
         setUser((user) => ({ ...user, [field]: value }))
     }
 
 
-
-    const registerCompany = async () => {
-
-    }
     //event logic
-    const registerCompany = () => {
-        saveCompany();
+    const registerCompany = async () => {
+        const companyData = await saveCompany();
+        setid(companyData._id);
     }
     useEffect(() => {
-        if (companyData) {
-            setUserField(companyData._id, 'company');
+        if (id !== "") {
+            saveUser().then((data, err) => {
+                if (data) {
+                    setOpenSuccess(true);
+                    resetForm();
+                }
+            });
         }
-    }, [companyData])
-    useEffect(() => {
-        if (user.company !== "") {
-            saveUser();
-            resetForm();
-            return;
-        }
-    }, [user])
-
-
+    }, [id])
 
     //feedback logic
+    const [openSuccess, setOpenSuccess] = useState(false);
     const [open, setOpen] = useState(true);
     useEffect(() => {
-        setOpen(true);
+        if (companyError || userError) {
+            setOpen(true);
+        }
     }, [companyError, userError])
 
 
@@ -92,11 +88,17 @@ const RegisterPage = () => {
         <StyledRegisterPage>
             <h1>Register</h1>
             <StyledFormWrapper>
-                {(companyError || userError) && open && <Feedback
+                {open && <Feedback
                     type='error'
                     onClose={() => { setOpen(false) }}
                     text={companyError?.err + "\n" + userError?.err}
                 />}
+                {openSuccess && <Feedback
+                    type='success'
+                    text={"Company Successfull registered"}
+                    onClose={() => { setOpenSuccess(false) }}
+                />}
+
                 <StyledRegisterFormSection>
                     <StyledFormSectionTitle>Company Information</StyledFormSectionTitle>
                     <StyledRegisterFormBody>

@@ -5,35 +5,23 @@ export function useLazyAxios({ endPoint, method, inputData }) {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
-    const [trigger, setTrigger] = useState(false);
-
     const fetch = () => {
-        setTrigger(true);
-    }
-    const fetchApi = async () => {
-        try {
-            const response = await axios({
-                method,
-                url: endPoint,
-                data: inputData
-            });
-            if (response.err) {
-                setError(response.err);
-            } else {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await axios({
+                    method,
+                    url: endPoint,
+                    data: inputData
+                });
                 setData(response.data);
+                resolve(response.data);
+            } catch (err) {
+                setError(err.response.data);
+                reject(err.response.data);
+            } finally {
+                setLoading(false);
             }
-        } catch (err) {
-            setError(err.response.data);
-        } finally {
-            setLoading(false);
-            setTrigger(false);
-        }
+        });
     }
-    useEffect(() => {
-        if (trigger) {
-            setLoading(true);
-            fetchApi();
-        }
-    }, [trigger]);
     return [fetch, { loading, data, error }];
 }
