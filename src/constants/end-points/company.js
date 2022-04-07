@@ -2,7 +2,7 @@ import { DELETE, GET, PATCH, POST } from "../methods";
 import API_URL from "./api";
 
 export const GET_ALL_COMPANIES = {
-    endPoint: API_URL + "/company",
+    endPoint: API_URL + "company",
     method: GET
 };
 export const GET_COMPANY = (companyId) => ({

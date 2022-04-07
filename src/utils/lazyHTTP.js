@@ -8,16 +8,17 @@ export function useLazyAxios({ endPoint, method, inputData }) {
     const fetch = () => {
         return new Promise(async (resolve, reject) => {
             try {
-                const response = await axios({
+                const response = await axios.default.request({
                     method,
                     url: endPoint,
-                    data: inputData
+                    data: inputData,
+                    withCredentials: true,
                 });
                 setData(response.data);
                 resolve(response.data);
             } catch (err) {
-                setError(err.response.data);
-                reject(err.response.data);
+                setError(err.response?.data);
+                reject(err.response?.data);
             } finally {
                 setLoading(false);
             }

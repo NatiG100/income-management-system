@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { LOGIN } from '../../../constants/end-points/auth';
+import { useLazyAxios } from '../../../utils/lazyHTTP';
 import Feedback from '../../UIComponents/Feedback';
 import Input from '../../UIComponents/Input';
 import RoundButton from '../../UIComponents/RoundButton';
@@ -17,20 +19,34 @@ const LoginPage = () => {
         email: "",
         password: "",
     });
+    const [login, { loading, error, data }] = useLazyAxios({ ...LOGIN, inputData: loginForm })
     const setLoginFormField = (value, field) => {
         setLoginForm((loginForm) => ({ ...loginForm, [field]: value }))
     }
 
+
+    //event logic
+    const requestLogin = async () => {
+        const data = await login();
+        console.log(data);
+    }
     //feedback show state
     const [open, setOpen] = useState(false);
+    useEffect(() => {
+        if (error) {
+            setOpen(true);
+        }
+    }, [error])
 
+
+    if (loading) return (<h1>Loading</h1>);
     return (
         <StyledLoginPage>
             <h1>Login</h1>
             {open && <Feedback
                 type='error'
                 onClose={() => { setOpen(false) }}
-                text={"error"}
+                text={error.err}
             />}
 
             <StyledLoginFormSection>
@@ -54,7 +70,7 @@ const LoginPage = () => {
             </StyledLoginFormSection>
             <RoundButton
                 text='Login'
-                onClick={() => { registerCompany() }}
+                onClick={() => { requestLogin() }}
             />
         </StyledLoginPage>
     );
