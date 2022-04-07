@@ -6,17 +6,20 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const isAdmin = router.pathname.includes('admin');
+  const isAdmin = router.pathname.includes('/admin');
+  const isSuperAdmin = router.pathname.includes('super-admin');
   return (
     <>
       {isAdmin ?
         <AdminLayout>
           <Component {...pageProps} />
         </AdminLayout>
-        :
-        <ClientLayout>
+        : isSuperAdmin ?
           <Component {...pageProps} />
-        </ClientLayout>
+          :
+          <ClientLayout>
+            <Component {...pageProps} />
+          </ClientLayout>
       }
     </>
   );

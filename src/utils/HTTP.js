@@ -6,17 +6,22 @@ export function useAxios({ endPoint, method, inputData }) {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const fetch = async () => {
-        const response = await axios({
-            method,
-            url: endPoint,
-            data: inputData
-        });
-        if (response.err) {
-            setError(response.err);
-        } else {
-            setData(response.data);
+        try {
+
+            const response = await axios({
+                method,
+                url: endPoint,
+                data: inputData
+            });
+            if (response.err) {
+                setError(response.err);
+            } else {
+                setData(response.data);
+            }
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
         }
-        setLoading(false);
     }
     useEffect(() => {
         fetch();

@@ -11,18 +11,23 @@ export function useLazyAxios({ endPoint, method, inputData }) {
         setTrigger(true);
     }
     const fetchApi = async () => {
-        const response = await axios({
-            method,
-            url: endPoint,
-            data: inputData
-        });
-        if (response.err) {
-            setError(response.err);
-        } else {
-            setData(response.data);
+        try {
+            const response = await axios({
+                method,
+                url: endPoint,
+                data: inputData
+            });
+            if (response.err) {
+                setError(response.err);
+            } else {
+                setData(response.data);
+            }
+        } catch (err) {
+            setError(err.response.data);
+        } finally {
+            setLoading(false);
+            setTrigger(false);
         }
-        setLoading(false);
-        setTrigger(false);
     }
     useEffect(() => {
         if (trigger) {
