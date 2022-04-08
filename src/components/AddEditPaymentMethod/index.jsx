@@ -7,6 +7,9 @@ import Input from './../UIComponents/Input';
 import Textarea from '../UIComponents/TextArea';
 import Modal from '../UIComponents/Modal';
 import RoundButton from '../UIComponents/RoundButton';
+import { useLazyAxios } from '../../utils/lazyHTTP';
+import { PAY } from '../../constants/end-points/transaction';
+import { CREATE_PAYMENT_METHOD, UPDATE_PAYMENT_METHOD } from '../../constants/end-points/paymentMethods';
 
 const AddEditPaymentMethod = ({
     onClose,
@@ -14,13 +17,27 @@ const AddEditPaymentMethod = ({
     formValueForEdit,
     setOpenSuccess,
     setOpenError,
-
+    refetchPaymentMethods = () => { }
 }) => {
+
     const [formValue, setFormValue] = useState({
         title: "",
         accountNumber: "",
         description: "",
     })
+    //////api calls/////////////////////////////
+    const [addPayment, {
+        loading: addLoading,
+        error: addError,
+        data: addData
+    }] = useLazyAxios({ ...CREATE_PAYMENT_METHOD, inputData: formValue });
+
+    const [editPayment, {
+        loading: editLoading,
+        error: editError,
+        data: editData,
+    }] = useLazyAxios({ ...UPDATE_PAYMENT_METHOD(formValueForEdit._id), inputData: formValue });
+
     const setFormItemValue = (itemName, value) => {
         setFormValue((form) => ({ ...form, [itemName]: value }));
     }
@@ -30,8 +47,15 @@ const AddEditPaymentMethod = ({
         }
     }, [isEdit, formValueForEdit])
 
-    const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
         if (formValue.accountNumber !== "" && formValue.title !== "" && formValue.description !== "") {
+            if (!isEdit) {
+                const d = await addPayment();
+                refetchPaymentMethods();
+            } else {
+                const d = await editPayment();
+                refetchPaymentMethods();
+            }
             setOpenSuccess(true);
             onClose();
         } else {
@@ -64,14 +88,14 @@ const AddEditPaymentMethod = ({
                 />
                 <StyledAddEditActions>
                     <RoundButton
-                        color='primary'
-                        text={isEdit ? "Save Changes" : "Add Method"}
-                        onClick={handleFormSubmit}
-                    />
-                    <RoundButton
                         color='secondary'
                         text={"Cancel"}
                         onClick={onClose}
+                    />
+                    <RoundButton
+                        color='primary'
+                        text={isEdit ? "Save Changes" : "Add Method"}
+                        onClick={handleFormSubmit}
                     />
                 </StyledAddEditActions>
             </StyledAddEditPaymentMethod>

@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { GET_ALL_PAYMENT_METHOD } from '../../../../../constants/end-points/paymentMethods';
 import { useAxios } from '../../../../../utils/HTTP';
+import { useLazyAxios } from '../../../../../utils/lazyHTTP';
 
 import {
     StylePaymentMethodList,
@@ -8,16 +10,40 @@ import {
     StyledContainer,
 
 } from './style'
-const PaymentMethodList = ({ setData, company, selectedIndex, setSelectedIndex, isAdmin = false }) => {
-    const { data, loading, error } = useAxios({ ...GET_ALL_PAYMENT_METHOD(company._id) });
-    setData(data);
+const PaymentMethodList = ({
+    setData = () => { },
+    selectedIndex,
+    setSelectedIndex,
+    isAdmin = false,
+    setTriggerRefetch,
+    triggerRefetch,
+    company
+}) => {
+    const [fetch, { data, loading, error }] = useLazyAxios({ ...GET_ALL_PAYMENT_METHOD(company?._id) });
+    const fetchData = async () => {
+        try {
+            const data = await fetch();
+            setData(data);
+        } catch (err) {
+
+        }
+    }
+    useEffect(() => {
+        fetchData();
+    }, [])
+    useEffect(() => {
+        if (triggerRefetch) {
+            fetchData();
+            setTriggerRefetch(false);
+        }
+    }, [triggerRefetch])
     return (
         <StyledContainer>
             {!isAdmin && <h2 style={{ height: "max-content" }}>Pay Now</h2>}
             {!isAdmin && <h3>Choose payment</h3>}
             {isAdmin && <h2>Payment Methods</h2>}
             <StylePaymentMethodList>
-                {loading ? <p>Loading</p> : error ? <p>Error</p> : data.map((method, methodIndex) => (
+                {loading ? <p>Loading</p> : error ? <p>Error</p> : data?.map((method, methodIndex) => (
                     <PaymentMethod
                         key={methodIndex}
                         title={method.title}

@@ -8,10 +8,11 @@ export function useAxios({ endPoint, method, inputData }) {
     const fetch = async () => {
         try {
 
-            const response = await axios({
+            const response = await axios.default.request({
                 method,
                 url: endPoint,
-                data: inputData
+                data: inputData,
+                withCredentials: true,
             });
             if (response.err) {
                 setError(response.err);

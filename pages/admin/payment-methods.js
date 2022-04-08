@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import PaymentMethodList from '../../src/components/pageComponents/CompanyList/PaymentForm/PaymentMethod'
 import IncomeTypeList from '../../src/components/pageComponents/IncomeTypeList';
-import companies from '../../src/data/companies';
+
 export default function PaymentMethods() {
     return (
         <div>

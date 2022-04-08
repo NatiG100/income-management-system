@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     StyledMenuItem,
     StyledDrawer,
 } from './style';
-import { useRouter } from 'next/dist/client/router';
+import { useRouter } from 'next/router';
+import { useLazyAxios } from '../../../../utils/lazyHTTP';
+import { LOGOUT, ME } from '../../../../constants/end-points/auth';
 
 const Drawer = () => {
+    ////logout logic
     const router = useRouter();
+    const [logout, { loading, error, data }] = useLazyAxios({ ...LOGOUT });
+    const requestLogout = async () => {
+        const success = await logout();
+        if (success) {
+            router.replace('/super-admin/login');
+        }
+    }
+
     const path = router.pathname;
     const page = path.includes('transactions') ? "transactions" :
         path.includes('payment-methods') ? "payment" :
@@ -31,6 +42,12 @@ const Drawer = () => {
                 onClick={() => { if (page !== "payment") router.push('/admin/payment-methods') }}
             >
                 <p>Payment Methods</p>
+            </StyledMenuItem>
+            <StyledMenuItem
+                selected={false}
+                onClick={requestLogout}
+            >
+                <p>Logout</p>
             </StyledMenuItem>
         </StyledDrawer>
     )

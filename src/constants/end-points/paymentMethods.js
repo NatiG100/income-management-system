@@ -14,7 +14,7 @@ export const CREATE_PAYMENT_METHOD = {
     method: POST
 };
 export const UPDATE_PAYMENT_METHOD = (methodId) => ({
-    endPoint: API_URL + "company/" + methodId,
+    endPoint: API_URL + "method/" + methodId,
     method: PATCH
 });
 export const DELETE_PAYMENT_METHOD = (methodId) => ({

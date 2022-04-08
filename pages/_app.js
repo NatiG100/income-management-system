@@ -1,7 +1,10 @@
 import { useRouter } from 'next/router'
+import { Provider } from 'react-redux';
 import AdminLayout from '../src/components/pageComponents/shared/AdminLayout';
 import ClientLayout from '../src/components/pageComponents/shared/ClientLayout';
 import { GET_ALL_COMPANIES } from '../src/constants/end-points/company';
+
+import store from './../src/redux/store';
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -11,11 +14,15 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {isAdmin ?
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
+        <Provider store={store}>
+          <AdminLayout>
+            <Component {...pageProps} />
+          </AdminLayout>
+        </Provider>
         : isSuperAdmin ?
-          <Component {...pageProps} />
+          <Provider store={store}>
+            <Component {...pageProps} />
+          </Provider>
           :
           <ClientLayout>
             <Component {...pageProps} />
