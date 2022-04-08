@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { LOGIN } from '../../../constants/end-points/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { LOGIN, ME } from '../../../constants/end-points/auth';
+import { login } from '../../../redux/slices/userSlice';
 import { useLazyAxios } from '../../../utils/lazyHTTP';
 import Feedback from '../../UIComponents/Feedback';
 import Input from '../../UIComponents/Input';
 import RoundButton from '../../UIComponents/RoundButton';
+import { useRouter } from 'next/router';
 import {
     StyledLoginFormBody,
     StyledFormSectionTitle,
@@ -14,21 +17,44 @@ import {
 const LoginPage = () => {
 
 
+
     //login form state logic
     const [loginForm, setLoginForm] = useState({
         email: "",
         password: "",
     });
-    const [login, { loading, error, data }] = useLazyAxios({ ...LOGIN, inputData: loginForm })
+
+    //redirect to the dashboard if user found
+    const [me, {
+        loading: meLoading,
+        error: meError,
+        data: meData
+    }] = useLazyAxios({ ...ME });
+    useEffect(() => {
+        me().then();
+    }, []);
+
+
+    const [axiosLogin, {
+        loading,
+        error,
+        data
+    }] = useLazyAxios({ ...LOGIN, inputData: loginForm })
     const setLoginFormField = (value, field) => {
         setLoginForm((loginForm) => ({ ...loginForm, [field]: value }))
     }
 
+    //state management logic
+    const router = useRouter();
+    useEffect(() => {
+        if (data || meData) {
+            router.replace('/admin');
+        }
+    }, [data, meData])
 
     //event logic
     const requestLogin = async () => {
-        const data = await login();
-        console.log(data);
+        await axiosLogin();
     }
     //feedback show state
     const [open, setOpen] = useState(false);
