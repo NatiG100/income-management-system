@@ -15,9 +15,15 @@ display:flex ;
 
 `;
 export const StyledTransaction = styled.div`
+    p{
+font-weight:400 ;
+font-size: 14px;
+
+    }
     display:grid ;
     position:relative ;
-    grid-template-columns:repeat(5,1fr) ;
+    grid-template-columns:3fr 2fr 2fr 1fr 1fr ;
+    gap:20px;
     padding-top:10px ;
     padding-bottom:15px ;
     border-bottom: 1px solid #f1f1f1;
@@ -28,9 +34,10 @@ export const StyledTransaction = styled.div`
     padding-right: 15px;
     ${({ isHeader }) => (!isHeader && "cursor:pointer;")}
     :hover{
-        ${({ isHeader }) => (!isHeader && "box-shadow:0px 3px 5px #2223;")}
+        ${({ isHeader }) => (!isHeader && "box-shadow:0px 1px 2px #2229;")}
+        
     }
-`;
+    `;
 export const StyledTransactionList = styled.div`
     padding:0px ;
     box-shadow:1px 1px 4px #2226 ;

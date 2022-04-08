@@ -7,6 +7,7 @@ import { useLazyAxios } from '../../../../utils/lazyHTTP';
 import Drawer from '../Drawer';
 import { StyledAdminLayout } from './style';
 import { useRouter } from 'next/router';
+import Dialogbox from '../../../UIComponents/DialogBox';
 
 const AdminLayout = ({ children }) => {
     const router = useRouter();

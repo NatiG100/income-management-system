@@ -17,7 +17,7 @@ export const UPDATE_PAYMENT_METHOD = (methodId) => ({
     endPoint: API_URL + "method/" + methodId,
     method: PATCH
 });
-export const DELETE_PAYMENT_METHOD = (methodId) => ({
+export const DELETE_PAYMENT_METHOD = (methodId = -1) => ({
     endPoint: API_URL + "method/" + methodId,
     method: DELETE
 });

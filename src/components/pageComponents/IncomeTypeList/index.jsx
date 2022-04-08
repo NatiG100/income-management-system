@@ -11,6 +11,10 @@ import AddEditPaymentMethod from '../../AddEditPaymentMethod';
 import Feedback from '../../UIComponents/Feedback';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useAxios } from '../../../utils/HTTP';
+import { DELETE_PAYMENT_METHOD } from '../../../constants/end-points/paymentMethods';
+import Dialogbox from '../../UIComponents/DialogBox';
+import { useLazyAxios } from '../../../utils/lazyHTTP';
 const IncomeTypeList = () => {
     const router = useRouter();
     const [selected, setSelected] = useState(-1);
@@ -40,8 +44,45 @@ const IncomeTypeList = () => {
             setOpen(true);
         }
     }
+
+
+    //////delete logic
+    const [requestDelete, {
+        error: deleteError,
+        loading: deleteLoading,
+        data: deleteData
+    }] = useLazyAxios({ ...DELETE_PAYMENT_METHOD(paymentMethods[selected]?._id) });
+
+    const [deleteFeedback, setDeleteFeedback] = useState(false);
+    const [deleteOpened, setDeleteOpened] = useState(false);
+    useEffect(() => {
+        if (deleteError) {
+            setDeleteFeedback(true);
+        }
+    }, [deleteError])
+    const deletePaymentMethod = async () => {
+        await requestDelete();
+        setTriggerRefetch(true);
+    }
     return (
         <StyledIncomeTypeList>
+            {
+                deleteOpened &&
+                <Dialogbox
+                    prompt={"Do you want to delete this product ?"}
+                    title="Delete product"
+                    action={deletePaymentMethod}
+                    isError={true}
+                    onClose={() => { setDeleteOpened(false) }}
+                />
+            }
+            {deleteFeedback &&
+                <Feedback
+                    type='error'
+                    onClose={() => setDeleteFeedback(false)}
+                    text={"Error while trying to delete a payment method."}
+                />
+            }
             {openSuccess &&
                 <Feedback
                     type='success'
@@ -63,7 +104,7 @@ const IncomeTypeList = () => {
                     text={"Please eneter a valid input."}
                 />
             }
-            {open && paymentMethods?.length !== 0 &&
+            {open &&
                 <AddEditPaymentMethod
                     isEdit={isEdit}
                     formValueForEdit={paymentMethods[selected]}
@@ -96,7 +137,7 @@ const IncomeTypeList = () => {
                 <RoundButton
                     text='Delete'
                     color='error'
-                    onClick={() => { }}
+                    onClick={() => setDeleteOpened(true)}
                 />
             </StyledActions>
         </StyledIncomeTypeList>

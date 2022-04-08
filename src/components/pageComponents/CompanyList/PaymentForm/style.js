@@ -21,8 +21,13 @@ export const StyledBottomSection = styled.div`
         }
     }
     button{
-        margin-left:10px ;
         font-size:16px ;
         align-self: flex-end;
     }
+`;
+
+export const StyledActions = styled.div`
+display:grid ;
+grid-template-columns: 1fr 1fr;
+gap:15px;
 `;

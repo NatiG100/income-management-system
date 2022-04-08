@@ -36,7 +36,7 @@ const AddEditPaymentMethod = ({
         loading: editLoading,
         error: editError,
         data: editData,
-    }] = useLazyAxios({ ...UPDATE_PAYMENT_METHOD(formValueForEdit._id), inputData: formValue });
+    }] = useLazyAxios({ ...UPDATE_PAYMENT_METHOD(formValueForEdit?._id), inputData: formValue });
 
     const setFormItemValue = (itemName, value) => {
         setFormValue((form) => ({ ...form, [itemName]: value }));

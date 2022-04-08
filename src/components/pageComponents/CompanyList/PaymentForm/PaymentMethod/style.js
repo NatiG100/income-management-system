@@ -3,6 +3,11 @@ import styled from "@emotion/styled"
 export const StylePaymentMethodList = styled.div`
     padding:10px ;
     display:grid ;
+    border:1px solid #2222 ;
+    border-radius:10px ;
+    padding:40px ;
+    padding-left:20px ;
+    padding-right:20px ;
     grid-row:auto ;
     grid-template-columns:1fr 1fr ;
     grid-template-rows:max-content ;
