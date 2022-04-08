@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     StyledMenuItem,
     StyledDrawer,
@@ -6,6 +6,7 @@ import {
 import { useRouter } from 'next/router';
 import { useLazyAxios } from '../../../../utils/lazyHTTP';
 import { LOGOUT, ME } from '../../../../constants/end-points/auth';
+import Dialogbox from '../../../UIComponents/DialogBox';
 
 const Drawer = () => {
     ////logout logic
@@ -22,8 +23,15 @@ const Drawer = () => {
     const page = path.includes('transactions') ? "transactions" :
         path.includes('payment-methods') ? "payment" :
             "dashboard";
+    const [openLogoutPrompt, setOpenLogoutPrompt] = useState(false);
     return (
         <StyledDrawer>
+            {openLogoutPrompt && <Dialogbox
+                prompt={"Are you sure you want to log out?"}
+                title='Logout'
+                action={requestLogout}
+                onClose={() => setOpenLogoutPrompt(false)}
+            />}
             <h2>Menu</h2>
             <StyledMenuItem
                 selected={page === "dashboard"}
@@ -45,7 +53,7 @@ const Drawer = () => {
             </StyledMenuItem>
             <StyledMenuItem
                 selected={false}
-                onClick={requestLogout}
+                onClick={() => setOpenLogoutPrompt(true)}
             >
                 <p>Logout</p>
             </StyledMenuItem>
